@@ -1,0 +1,19 @@
+<?php require("../app/Views/back/header.terminal.phtml"); ?>
+
+
+<h1>Shipped orders (<?= $orderListCount ?>)</h1>
+<?php foreach($orderList as $ordernum => $data): ?>
+    Order Number : <?= $ordernum ?><br/>
+    Status : <?= $data["status"] ?><br/>
+    <?php if(isset($data["tracknum"])): ?>
+    Order Tracking Number : <?= htmlspecialchars($data["tracknum"]); ?><br/>
+    <?php endif; ?>
+    <a href="/admin/order/details/<?= $ordernum ?>" title="">view details</a><br/>
+    <?php foreach($data["content"] as $item): ?>
+        <img src="/<?= $item->imageuri ?>" alt=""?><br/>
+        <a href="/admin/product/details/<?= htmlspecialchars($item->upc); ?>" title=""><?= htmlspecialchars($item->name); ?></a><br/>
+    <?php endforeach; ?>
+<?php endforeach; ?>
+
+
+<?php require("../app/Views/back/footer.terminal.phtml") ?>

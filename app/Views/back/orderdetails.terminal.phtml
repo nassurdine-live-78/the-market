@@ -1,0 +1,43 @@
+<?php require("../app/Views/back/header.terminal.phtml"); ?>
+
+<br/>
+
+<a href="/admin/orders" title="orders">back</a>
+
+<br/>
+    Order Number : <?= $order->ordernum ?><br/><br/>
+
+    <?php if($isProcessing !== FALSE): ?>
+    <form action="/admin/orderstatusupdate" method="POST">
+        Status: <?= $status ?>
+        <input type="hidden" name="ordernum" value="<?= $order->ordernum ?>"/>
+        <?php if(isset($isProcessing) && $isProcessing): ?>
+        Tracking Number : <input type="text" name="tracknum" required/>
+        <?php endif; ?>
+        <?php if($nextStep !== FALSE): ?>
+        <button type="submit" name="next-step" value="<?= $nextStep ?>">Switch to <?= $nextStep ?></button>
+        <?php endif; ?>
+    </form>
+    <?php else: ?>
+        Tracking Number : <?= htmlspecialchars($tracknum); ?>
+    <?php endif; ?>
+
+    <b>Shipping details:</b><br/>
+    <?= htmlspecialchars($order->shippingfullname); ?><br/>
+    <?= htmlspecialchars($order->shippinglineone); ?><br/>
+    <?= htmlspecialchars($order->shippinglinetwo); ?><br/>
+    <?= htmlspecialchars($order->shippingzipcode); ?> - <?= htmlspecialchars($order->shippingcity); ?><br/>
+    <?= htmlspecialchars($order->shippingphone); ?><br/><br/>
+
+    <b>Récapitulatif de commande:</b><br/>
+    Items : $<?= $total ?> USD<br/>
+    Shipping : $<?= number_format($order->shippingcost, 2) ?> USD<br/>
+    Total Tax Incl. : $<?= $total ?> USD<br/>
+
+    <?php foreach($orderitems as $item): ?>
+        <img src="/<?= $item->imageuri ?>" alt=""?><br/>
+        <a href="/admin/product/details/<?= htmlspecialchars($item->upc); ?>" title=""><?= htmlspecialchars($item->name); ?></a>
+    <?php endforeach; ?>
+    
+
+<?php require("../app/Views/back/footer.terminal.phtml") ?>

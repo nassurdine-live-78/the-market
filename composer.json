@@ -1,0 +1,21 @@
+{
+    "name": "wopr/joshua",
+    "description": "An MVC framework with dynamically generated forms to prevent invalid values and Cross-Site Resource Forgery.",
+    "type": "project",
+    "license": "BSD",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app",
+            "Joshua\\": "vendor/wopr/joshua"
+        }
+    },
+    "authors": [
+        {
+            "name": "Soule Nassurdine"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "vlucas/phpdotenv": "^5.5@dev"
+    }
+}

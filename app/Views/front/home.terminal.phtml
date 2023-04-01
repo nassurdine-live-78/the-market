@@ -1,0 +1,13 @@
+	<?php require("header.terminal.phtml") ?>
+	
+	<div class="close-btn fa fa-times"></div>
+
+	
+	<!-- SHOP CONTENT -->
+	<?php foreach($slides as $slide): ?>
+	<img src="<?= $slide->imageurl; ?>" alt="<?= htmlspecialchars($slide->alternativetext); ?>"/>
+	<?php endforeach; ?>
+	
+	<div class="clearfix space70"></div>
+
+    <?php require("footer.terminal.phtml") ?>

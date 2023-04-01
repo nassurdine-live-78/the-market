@@ -1,0 +1,14 @@
+    <?php require("header.terminal.phtml") ?>
+
+    <br/>
+
+    <!-- Product list START -->
+    <?php foreach($products as $product): ?>
+        <a href="/product/<?= htmlspecialchars($product->upc); ?>" title="">
+            <img src="/<?= $product->imageuri; ?>" alt="Thumbnail of <?= htmlspecialchars($product->name); ?>"/><br/>
+            <span><?= htmlspecialchars($product->name); ?></span><br/>
+        </a>
+    <?php endforeach; ?>
+    <!-- Product list END -->
+
+    <?php require("footer.terminal.phtml") ?>

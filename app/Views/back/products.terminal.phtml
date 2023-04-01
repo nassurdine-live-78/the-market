@@ -1,0 +1,41 @@
+<?php require("../app/Views/back/header.terminal.phtml"); ?>
+
+	<!-- Product START -->
+	<form name="details" method="POST" action="/admin/product/create" enctype="multipart/form-data">
+
+        <label>Name:<input type="text" 		name="name" 		value=""    required/></label><br/>
+
+        <label>UPC:<input type="text" 	    name="upc"			value=""    required/></label><br/>
+
+        <label>Image:<input type="file"     name="image"             required/></label><br/>
+
+        <label>Price:<input type="number" 	name="price" 		value="" min="0" step=".01" title="the price must contain two decimal places" required/></label><br/>
+
+        <select name="category">
+            <?php foreach($categories as $category): ?>
+                <option value="<?= $category->id ?>"><?= htmlspecialchars($category->name); ?></option>
+            <?php endforeach; ?>
+        </select>
+
+        <div id="editor">
+        </div>
+
+        <input type="hidden" 	name="description"	value=""/>
+        <input type="hidden" 	name="token"		value="<?= $token ?>" />
+
+        <button type="submit">create</button>
+
+	</form>
+	<!-- Product END -->
+
+    <?php if($offset !== 0): ?>
+    <a href="/admin/products/<?= $offset ?>" title="">Previous</a><br/>
+    <?php endif; ?>
+    <?php foreach($products as $item): ?>
+    <a href="/admin/product/details/<?= htmlspecialchars($item->upc); ?>" title=""><?= htmlspecialchars($item->name); ?></a><br/>
+    <?php endforeach; ?>
+    <?php if($offset+2 <= $maxPages): ?>
+    <a href="/admin/products/<?= $offset+2 ?>" title="">Next</a><br/>
+    <?php endif; ?>
+
+<?php require("../app/Views/back/footer.terminal.phtml") ?>

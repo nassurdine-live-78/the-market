@@ -1,0 +1,54 @@
+<?php require("../app/Views/back/header.terminal.phtml"); ?>
+
+
+<br/>
+
+<h1>Pending orders (<?= $pendingOrdersCount ?>)</h1>
+<?php foreach($pendingOrders as $ordernum => $data): ?>
+    Order Number : <?= $ordernum ?><br/>
+    Status : <?= $data["status"] ?><br/>
+    <?php if(isset($data["tracknum"])): ?>
+    Order Tracking Number : <?= htmlspecialchars($data["tracknum"]); ?><br/>
+    <?php endif; ?>
+    <a href="/admin/order/details/<?= $ordernum ?>" title="">view details</a><br/>
+    <?php foreach($data["content"] as $item): ?>
+        <img src="/<?= $item->imageuri ?>" alt=""?><br/>
+        <a href="/admin/product/details/<?= htmlspecialchars($item->upc); ?>" title=""><?= htmlspecialchars($item->name); ?></a><br/>
+    <?php endforeach; ?>
+<?php endforeach; ?>
+<a href="/admin/orders/pending" title="more pending orders">View More...</a>
+
+
+<h1>Processing orders (<?= $processingOrdersCount ?>)</h1>
+<?php foreach($processingOrders as $ordernum => $data): ?>
+    Order Number : <?= $ordernum ?><br/>
+    Status : <?= $data["status"] ?><br/>
+    <?php if(isset($data["tracknum"])): ?>
+    Order Tracking Number : <?= htmlspecialchars($data["tracknum"]); ?><br/>
+    <?php endif; ?>
+    <a href="/admin/order/details/<?= $ordernum ?>" title="">view details</a><br/>
+    <?php foreach($data["content"] as $item): ?>
+        <img src="/<?= $item->imageuri ?>" alt=""?><br/>
+        <a href="/admin/product/details/<?= htmlspecialchars($item->upc) ?>" title=""><?= htmlspecialchars($item->name) ?></a><br/>
+    <?php endforeach; ?>
+<?php endforeach; ?>
+<a href="/admin/orders/processing" title="more pending orders">View More...</a>
+
+
+<h1>Shipped orders (<?= $shippedOrdersCount ?>)</h1>
+<?php foreach($shippedOrders as $ordernum => $data): ?>
+    Order Number : <?= $ordernum ?><br/>
+    Status : <?= $data["status"] ?><br/>
+    <?php if(isset($data["tracknum"])): ?>
+    Order Tracking Number : <?= htmlspecialchars($data["tracknum"]); ?><br/>
+    <?php endif; ?>
+    <a href="/admin/order/details/<?= $ordernum ?>" title="">view details</a><br/>
+    <?php foreach($data["content"] as $item): ?>
+        <img src="/<?= $item->imageuri ?>" alt=""?><br/>
+        <a href="/admin/product/details/<?= htmlspecialchars($item->upc); ?>" title=""><?= htmlspecialchars($item->name); ?></a><br/>
+    <?php endforeach; ?>
+<?php endforeach; ?>
+<a href="/admin/orders/shipped" title="more shipped orders">View More...</a>
+
+
+<?php require("../app/Views/back/footer.terminal.phtml") ?>

@@ -1,0 +1,54 @@
+<?php require("header.terminal.phtml") ?>
+
+<?php if(count($errors) > 0): ?>
+    <ul>
+    <?php foreach($errors as $error): ?>
+        <li><?= $error; ?></li>
+    <?php endforeach; ?>
+    </ul>
+<?php endif; ?>
+
+
+<form method="POST" >
+	<h2>Basic Information</h2>
+	<input type="text" 		name="email" 			value="<?= htmlspecialchars($email); ?>"	disabled/><br/>
+	<input type="password" 	name="password-old" 	value=""				placeholder="old password"					/><br/>
+	<input type="password" 	name="password-new" 	value=""				placeholder="new password"					/><br/>
+	<input type="password" 	name="password-confirm" value=""				placeholder="new password confirmation"		/><br/>
+    <input type="hidden"    name="token"            value="<?= $token; ?>"/>
+
+	<input type="submit" name="submit-password" value="Update password"/>
+</form>
+
+<form method="POST">
+	<h2>Shipping Address</h2>
+	<select name="shipping-country">
+		<?php foreach($countries as $countryCode => $countryName): ?>
+		<option value="<?= htmlspecialchars($countryCode); ?>" <?= ($countryCode === $shippingCountryCode) ? "selected" : "" ?>><?= htmlspecialchars($countryName); ?></option>
+		<?php endforeach; ?>
+	</select><br/>
+	<input type="text" 		name="shipping-fullname" 		value="<?= htmlspecialchars($shippingFullname); ?>"		placeholder="Full Name"		/><br/>
+	<input type="text" 		name="shipping-phonenumber" 	value="<?= htmlspecialchars($shippingPhoneNumber); ?>"	placeholder="Phone Number"	/><br/>
+	<input type="text" 		name="shipping-address-one" 	value="<?= htmlspecialchars($shippingAddressOne); ?>"	placeholder="Address Line 1"/><br/>
+	<input type="text" 		name="shipping-address-two" 	value="<?= htmlspecialchars($shippingAddressTwo); ?>"	placeholder="Address Line 2"/><br/>
+	<input type="text" 		name="shipping-zip-code"	 	value="<?= htmlspecialchars($shippingZipCode); ?>"		placeholder="Zip Code"		/><br/>
+	<input type="text" 		name="shipping-city" 			value="<?= htmlspecialchars($shippingCity); ?>"			placeholder="City"			/><br/>
+	<h2>Billing Address</h2>
+	<select name="billing-country">
+		<?php foreach($countries as $countryCode => $countryName): ?>
+		<option value="<?= htmlspecialchars($countryCode); ?>" <?= ($countryCode === $billingCountryCode) ? "selected" : "" ?>><?= htmlspecialchars($countryName); ?></option>
+		<?php endforeach; ?>
+	</select><br/>
+	<input type="text" 		name="billing-fullname" 		value="<?= htmlspecialchars($billingFullname); ?>"		placeholder="Full Name"		/><br/>
+	<input type="text" 		name="billing-address-one" 		value="<?= htmlspecialchars($billingAddressOne); ?>"	placeholder="Address Line 1"/><br/>
+	<input type="text" 		name="billing-address-two" 		value="<?= htmlspecialchars($billingAddressTwo); ?>"	placeholder="Address Line 2"/><br/>
+	<input type="text" 		name="billing-zip-code"	 		value="<?= htmlspecialchars($billingZipCode); ?>"		placeholder="Zip Code"		/><br/>
+	<input type="text" 		name="billing-city" 			value="<?= htmlspecialchars($billingCity); ?>"			placeholder="City"			/><br/>
+    <input type="hidden"    name="token"            		value="<?= $token; ?>"/>
+
+	<input type="submit" name="submit-address" value="Save changes"/>
+</form>
+
+<a href="/orders" title="orders">Your Orders</a>
+
+<?php require("footer.terminal.phtml") ?>

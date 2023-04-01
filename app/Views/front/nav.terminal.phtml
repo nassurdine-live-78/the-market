@@ -1,0 +1,17 @@
+        
+        <!-- Navigation START -->
+
+        
+        <a href="/" title="Link to homepage">Home</a>
+        <?php if($loggedInState): ?>
+        <a href="/logout" title="Link to homepage">Log out</a>
+        <a href="/account" title="Link to homepage">Account</a>
+        <?php else: ?>
+        <a href="/login" title="Link to homepage">Log in</a>
+        <?php endif; ?>
+        <?php foreach($categories as $category): ?>
+        <a href="/browse/<?= htmlspecialchars($category->uri); ?>" title="Link to <?= htmlspecialchars($category->name); ?>"><?= htmlspecialchars($category->name); ?></a>
+        <?php endforeach; ?>
+        <a href="/cart"><span id="cart">Cart(<?= $itemcount; ?>)</span></a>
+
+        <!-- Navigation END -->

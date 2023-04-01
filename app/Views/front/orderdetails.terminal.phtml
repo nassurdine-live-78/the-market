@@ -1,0 +1,33 @@
+<?php require("../app/Views/front/header.terminal.phtml"); ?>
+
+
+<br/>
+
+<a href="/orders" title="orders">back</a>
+
+<br/>
+    Order Number : <?= $order->ordernum ?><br/><br/>
+    
+    Status: <?= $status ?><br/>
+    <?php if($hasTracknum): ?>
+        Tracking Number : <?= $order->tracknum ?><br/>
+    <?php endif; ?>
+
+    <b>Shipping details:</b><br/>
+    <?= htmlspecialchars($order->shippingfullname); ?><br/>
+    <?= htmlspecialchars($order->shippinglineone); ?><br/>
+    <?= htmlspecialchars($order->shippinglinetwo); ?><br/>
+    <?= htmlspecialchars($order->shippingzipcode); ?> - <?= htmlspecialchars($order->shippingcity); ?><br/>
+    <?= htmlspecialchars($order->shippingphone); ?><br/><br/>
+
+    <b>Récapitulatif de commande:</b><br/>
+    Items : $<?= $total ?> USD<br/>
+    Shipping : $<?= number_format($order->shippingcost, 2) ?> USD<br/>
+    Total Tax Incl. : $<?= $total ?> USD<br/>
+
+    <?php foreach($orderitems as $item): ?>
+        <img src="/<?= $item->imageuri ?>" alt=""?><br/>
+        <a href="/product/<?= htmlspecialchars($item->upc); ?>" title=""><?= htmlspecialchars($item->name); ?></a>
+    <?php endforeach; ?>
+
+<?php require("../app/Views/front/footer.terminal.phtml") ?>

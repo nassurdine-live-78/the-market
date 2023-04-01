@@ -1,0 +1,24 @@
+<?php require("header.terminal.phtml") ?>
+
+	<!-- Product START -->
+	<h1><?= htmlspecialchars($product->name); ?></h1>
+	<img src="/<?= $product->imageuri; ?>" alt="Image of <?= htmlspecialchars($product->name); ?>"/>
+	<p>
+	<?= $product->price; ?>
+	</p>
+	<p>
+	<?= nl2br($product->description); ?>
+	</p>
+
+	<form action="/cart/add" method="POST">
+		<select name="quantity">
+			<?php for($i = 0; $i < $product->instock; $i++): ?>
+			<option value="<?= $i+1 ?>"><?= $i+1 ?></option>
+			<?php endfor; ?>
+		</select>
+		<input type="hidden" name="productId" 	value="<?= $product->id; ?>"/>
+		<input type="submit" name="action" value="Add to cart"/>
+	</form>
+	<!-- Product END -->
+
+<?php require("footer.terminal.phtml") ?>

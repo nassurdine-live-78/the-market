@@ -1,0 +1,30 @@
+<?php require("../app/Views/back/header.terminal.phtml"); ?>
+
+
+
+	<!-- Category creation form START -->
+	<form name="details" method="POST" action="/admin/category/create">
+
+        <label>Name:<input type="text" 		name="name" 		value=""    required/></label><br/>
+
+        <label>Slug:<input type="text" 	    name="uri"			value=""    required/></label><br/>
+
+        <input type="hidden" 	name="token"		value="<?= $token ?>" />
+
+        <button type="submit">create</button>
+
+	</form>
+	<!-- Category creation form END -->
+
+
+<?php foreach($categories as $category): ?>
+<?= htmlspecialchars($category->name); ?> <a href="/admin/category/details/<?= htmlspecialchars($category->uri); ?>">Edit</a> 
+<form action="/admin/category/delete" method="post">
+    <input type="hidden" 	name="token"    value="<?= $token ?>" />
+    <input type="hidden" 	name="guid"     value="<?= $category->guid ?>" />
+    <button type="submit">Delete</button>
+</form>
+<br/>
+<?php endforeach; ?>
+
+<?php require("../app/Views/back/footer.terminal.phtml") ?>

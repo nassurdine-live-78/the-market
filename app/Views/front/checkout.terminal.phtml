@@ -1,0 +1,122 @@
+<?php require("header.terminal.phtml") ?>
+	
+<h2>Adresse de livraison</h2>
+
+    <?= $address->shippingfullname; ?><br/>
+    <?= $address->shippingphone; ?><br/>
+    <?= $address->shippinglineone; ?><br/>
+    <?= $address->shippinglinetwo; ?><br/>
+    <?= $address->shippingzipcode; ?> - 
+    <?= $address->shippingcity; ?>
+	
+<h2>Mode de paiement</h2>
+
+<h2>Vérification et validation de votre commande</h2>
+
+	<?php foreach($products as $product): ?>
+        <div>
+            <img src="<?= $product["product"]->imageuri ?>" alt="Thumnail of <?= htmlspecialchars($product["product"]->name); ?>"/>
+            <p><?= htmlspecialchars($product["product"]->name); ?></p>
+            <p>$<?= $product["product"]->price ?></p>
+            <p>Quantity: <?= $product["quantity"] ?></p>
+        </div>
+    <?php endforeach; ?>
+    
+    <?php if($itemcount > 0): ?>
+    <p>Subtotal (<?= $totalitems . (($totalitems === 1) ? " item" : " items"); ?>): $<?= $subtotal ?></p>
+    <?php endif; ?>
+
+    <div id="paypal-button-container"></div>
+
+    <script src="https://www.paypal.com/sdk/js?client-id=<?= $clientID ?>&currency=USD&intent=authorize"></script>
+
+    <script>
+
+    paypal.Buttons({
+
+        // Order is created on the server and the order id is returned
+
+        createOrder() {
+
+        return fetch("/order/create/paypal-order", {
+
+            method: "post",
+
+            // use the "body" param to optionally pass additional order information
+
+            // like product skus and quantities
+
+            body: JSON.stringify(
+                {
+
+                    cart: [
+                        
+                        <?php foreach($products as $product): ?>
+                            {
+
+                                upc: "<?= $product["product"]->upc?>",
+
+                                quantity: <?= $product["quantity"]?>,
+
+                            },
+                        <?php endforeach; ?>
+
+                    ],
+
+                }
+            ),
+
+        })
+        .then((response) => response.json())
+        .then((order) => order.id);
+
+        },
+
+        // Finalize the transaction on the server after payer approval
+
+        onApprove(data) {
+
+        return fetch("/order/process/paypal-order/"+data.orderID, {
+
+            method: "post",
+
+            body: JSON.stringify({
+
+            orderID: data.orderID
+
+            })
+
+        })
+
+        .then((response) => response.json())
+
+        .then((orderData) => {
+
+            // Successful capture! For dev/demo purposes:
+
+            if(orderData.status === "COMPLETED") {
+                window.location.href = "/order/confirmation";
+            }
+
+            // console.log('Capture result', orderData, JSON.stringify(orderData, null, 2)/**/);
+
+            // const transaction = orderData.purchase_units[0].payments.authorizations[0];
+
+            // alert(`Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`);
+
+            // When ready to go live, remove the alert and show a success message within this page. For example:
+
+            // const element = document.getElementById('paypal-button-container');
+
+            // element.innerHTML = '<h3>Thank you for your payment!</h3>';
+
+            // Or go to another URL:  window.location.href = 'thank_you.html';
+
+        });
+
+        }
+
+    }).render('#paypal-button-container');
+
+    </script>
+<?php require("footer.terminal.phtml") ?>

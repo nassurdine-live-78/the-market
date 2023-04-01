@@ -1,0 +1,13 @@
+<?php require("header.terminal.phtml") ?>
+<h1>Order Completed</h1>
+
+<h1>Order confirmed</h1>
+
+<?php foreach($products as $product): ?>
+    <a href="/product/<?= htmlspecialchars($product->upc); ?>" title="">
+        <img src="/<?= $product->imageuri; ?>" alt="Thumbnail of <?= htmlspecialchars($product->name); ?>"/>
+        <span><?= htmlspecialchars($product->name); ?></span>
+    </a>
+<?php endforeach; ?>
+
+<?php require("footer.terminal.phtml") ?>

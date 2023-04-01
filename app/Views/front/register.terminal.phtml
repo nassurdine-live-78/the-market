@@ -1,0 +1,22 @@
+<!-- < ?php require("header.terminal.phtml") ?> -->
+	
+
+<?php if(count($errors) > 0): ?>
+    <ul>
+    <?php foreach($errors as $error): ?>
+        <li><?= $error; ?></li>
+    <?php endforeach; ?>
+    </ul>
+<?php endif; ?>
+
+<form action="/register" method="POST">
+    <input type="text"      name="email"            value="<?= htmlspecialchars($email); ?>"    placeholder="email@example.com"/>
+    <input type="password"  name="password"         value="<?= $password; ?>"                   placeholder="password"/>
+    <input type="password"  name="password-confirm" value=""                                    placeholder="re-enter password"/>
+    <input type="hidden"    name="token"            value="<?= $token; ?>"/>
+    <input type="submit"    name="submit"           value="Register"/>
+</form>
+
+<a href="/register" title="create your account">Create your WareMarket account</a>
+
+<?php require("footer.terminal.phtml") ?>

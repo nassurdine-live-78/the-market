@@ -1,0 +1,35 @@
+<?php require("../app/Views/back/header.terminal.phtml"); ?>
+
+	<!-- Product START -->
+	<form name="details" method="POST" action="/admin/product/updatedetails">
+	<input type="text" 		name="name" 		value="<?= htmlspecialchars($product->name); ?>"/>
+	<img src="/<?= $product->imageuri; ?>" alt="Image of <?= htmlspecialchars($product->name); ?>"/>
+	<p>
+	<input type="number" 	name="price" 		value="<?= htmlspecialchars($product->price); ?>" min="0" step=".01" title="the price must contain two decimal places"/>
+	</p>
+
+	
+
+	<div id="editor">
+	<?= $product->description ?>
+	</div>
+	<input type="hidden" 	name="description"	value=""/>
+	Stock: <?= htmlspecialchars($product->instock); ?>
+
+	<input type="hidden" 	name="upc"			value="<?= htmlspecialchars($upc); ?>" />
+	<input type="hidden" 	name="token"		value="<?= $token ?>" />
+
+	<button type="submit">update</button>
+	</form>
+
+	<form name="details" method="POST" action="/admin/product/updatestock">
+    Value:
+	<input 	type="number"	name="stock"	value="" min="0" />
+	<input 	type="hidden" 	name="upc"		value="<?= htmlspecialchars($upc); ?>" />
+	<input 	type="hidden" 	name="token"	value="<?= $token ?>" />
+	<button type="submit" 	name="submit"	value="decrease">decrease</button>
+	<button type="submit" 	name="submit" 	value="increase">increase</button>
+	</form>
+	<!-- Product END -->
+
+<?php require("../app/Views/back/footer.terminal.phtml") ?>

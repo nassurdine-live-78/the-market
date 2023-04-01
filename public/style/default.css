@@ -1,0 +1,243 @@
+
+/******************************************************************************
+
+                               .;cccccccccccccc;.                               
+                         .:::::coddddddddddddddoc:::::.                         
+                .,;;;;;;;lxxxxxc.              .cxxxxxl;;;;;;;,.                
+            .''':xkkkkkkk,                            ,kkkkkkkx:'''.            
+        ....ckOOl.                                            .lOOkc....        
+      .'okOk:      ..                                      ..      :kOko'.      
+     ,kO;...      .xk'      ...                  ...      'kx.      ...;Ok,     
+   ,kKWK;         ,OO'     ;kkkl.              .lkkk;     'OO,         ;KWKk,   
+ ,kKWMMWKk,   ,xOOd;.  cOOkl'.'.      :kk:      .'.'lkOOc  .;dOOx,   ,kKWMMWKk, 
+ :NMMMMMMWKkkko,oXO.   .,,,.          .,,.          .,,,.   .OXo,okkkKWMMMMMMN: 
+ .,;;;;;;;;;;;. ;XO.                :xxxxxx:                .OX; .;;;;;;;;;;;,. 
+              .olc, .:ddo'       .:xKMMMMMMKx:.       'odd:. ,clo.              
+              :Nx..:dXMMWOo,     .kNkcccccckNk.     ,oOMMMXd:..xN:              
+              :Nx.'0MMMMMMMo     .kX;      ;Xk.     oMMMMMMM0'.xN:              
+              :Nx..cxXMMW0d,     .kX;      ;XKo::;. ,d0WMMXxc..xN:              
+              :Nx.  .:xxd'       .cdc;;;;;;dNXkxxdc;. 'dxx:.  .xN:              
+              'xo;.                 ckkkkkkKWk.   ckc,.      .;ox'              
+                ;Kk.                       ,xd;.    :kl'.   .kK;                
+                ;K0;.                        'dd;.    ;kl'..;0K;                
+                ;XN0d.             ............'xO,    .:0KO0NX;                
+                ;X0;.            .lO0KKKKKK0Ol..x0;     ;0k,;0X;                
+                ;KO.              .,kWWWWWWk,.  .,oO,    .. .OK;                
+                ;KO.                .''''''.     .xN:       .OK;                
+              'do;'                               .,.        ';od'  
+              
+              
+                          @Author: SOULE Nassurdine
+
+*******************************************************************************
+*******************************************************************************
+                                                                         
+                  ____                                                   
+                ,'  , `.                               ,--,              
+             ,-+-,.' _ |            ,---,     ,--,   ,--.'|              
+          ,-+-. ;   , ||   ,---.  ,---.'|   ,--.'|   |  | :              
+         ,--.'|'   |  ;|  '   ,'\ |   | :   |  |,    :  : '              
+        |   |  ,', |  ': /   /   |:   : :   `--'_    |  ' |      ,---.   
+        |   | /  | |  ||.   ; ,. ::     |,-.,' ,'|   '  | |     /     \  
+        '   | :  | :  |,'   | |: :|   : '  |'  | |   |  | :    /    /  | 
+        ;   . |  ; |--' '   | .; :|   |  / :|  | :   '  : |__ .    ' / | 
+        |   : |  | ,    |   :    |'   : |: |'  : |__ |  | '.'|'   ;   /| 
+        |   : '  |/      \   \  / |   | '/ :|  | '.'|;  :    ;'   |  / | 
+        ;   | |`-'        `----'  |   :    |;  :    ;|  ,   / |   :    | 
+        |   ;/                    /    \  / |  ,   /  ---`-'   \   \  /  
+        '---'                     `-'----'   ---`-'             `----'   
+                                                                         
+                                                                         
+*******************************************************************************
+*******************************************************************************
+
+                 ██████╗ ██╗      ██████╗ ██████╗  █████╗ ██╗     
+                ██╔════╝ ██║     ██╔═══██╗██╔══██╗██╔══██╗██║     
+                ██║  ███╗██║     ██║   ██║██████╔╝███████║██║     
+                ██║   ██║██║     ██║   ██║██╔══██╗██╔══██║██║     
+                ╚██████╔╝███████╗╚██████╔╝██████╔╝██║  ██║███████╗
+                 ╚═════╝ ╚══════╝ ╚═════╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝
+                                                  
+                                                  
+*******************************************************************************
+*/
+
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    margin: 0;;
+}
+
+
+/******************************************************************************
+
+                ██╗  ██╗███████╗ █████╗ ██████╗ ███████╗██████╗ 
+                ██║  ██║██╔════╝██╔══██╗██╔══██╗██╔════╝██╔══██╗
+                ███████║█████╗  ███████║██║  ██║█████╗  ██████╔╝
+                ██╔══██║██╔══╝  ██╔══██║██║  ██║██╔══╝  ██╔══██╗
+                ██║  ██║███████╗██║  ██║██████╔╝███████╗██║  ██║
+                ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═════╝ ╚══════╝╚═╝  ╚═╝
+                                                
+*******************************************************************************
+*/
+
+
+.main-header {
+    position: fixed;
+    bottom: 0;
+    color: white;
+    background-color: #222;
+    width: 100%;
+    z-index: 9999;
+    display: flex;
+    padding-bottom: 5px;
+}
+
+.main-header>div {
+    display: flex;
+    flex-grow: 3;
+}
+
+.main-header nav {
+    flex-grow: 1;
+}
+
+.main-header>div>* {
+    flex-grow: 1;
+}
+
+.main-header>div>a span, .main-header>div .account-action span {
+    display: none;
+}
+
+.main-header [class^=fa-] {
+    font-size: 2rem;
+    position:relative;
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 30px;
+    text-align: center;
+    padding-top: 7px;
+}
+
+.main-header [class^=fa-].active {
+    border-top: 2px solid white;
+}
+
+.main-header>div>a, .main-header>div>a:visited {
+    color:white;
+}
+
+.fa-cart-shopping {
+    position: relative;
+}
+.cart .count {
+    display: inline-block;
+    text-align: center;
+    font-size: .7rem;
+    font-weight:normal;
+    background-color: red;
+    padding: 2px;
+    min-width:11px;
+    border-radius:50px;
+    position:absolute;
+    top: 2px;
+    right: -2px;
+}
+
+.main-header div>ul {
+    display: none;
+    list-style: none;
+    padding: 0;
+}
+
+#search-box {
+    position:           fixed;
+    top:                0;
+    left:               0;
+    background-color:   black;
+    padding:            5px;
+    width:              100%;
+}
+
+#search-box form {
+    display: flex;
+    width: 100%;;
+}
+
+#search-box form>* {
+    flex-grow:  1;
+}
+
+#search-box input[type=text] {
+    display: block;
+    background-color: #222;
+    border: 1px solid #404040;
+    border-radius: 5px 0px 0px 5px;
+    padding: 5px;
+}
+
+#search-box input[type=text]::placeholder {
+    color: #888;
+    font-size: 1rem;
+}
+
+#search-box button {
+    display: block;
+    background-color: #909090;
+    border: 1px solid #404040;
+    border-radius: 0px 5px 5px 0px;
+    padding: 5px;
+    font-size: 1rem;
+    max-width: 120px;
+}
+
+
+.main-header nav .dynamic-categories, .main-header nav .menu>div {
+    display: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+main {
+    margin-top: 38px;
+}
+
+
+
+
+
+
+
+
+
+
+
+.splide__slide img {
+    width: 100vw;
+}

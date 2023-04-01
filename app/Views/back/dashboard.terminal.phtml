@@ -1,0 +1,157 @@
+<?php require("../app/Views/back/header.terminal.phtml"); ?>
+
+    <style>
+        #carousel-preview {
+            min-height: 200px;
+            background-color: red;
+        }
+    </style>
+    <h1>Carousel</h1>
+    <div id="carousel-preview">
+        <?php foreach($slides as $slide): ?>
+        <div class="slide">
+            <div>
+                <img src="/<?= $slide->imageurl ?>" alt=""/>
+            </div>
+            <button>remove</button>
+        </div>
+        <?php endforeach; ?>
+    </div>
+    <form action="" method="post">
+        <input  type="file" id="upload-button" multiple accept="image/*" />
+        <input 	type="hidden" 	name="token"	value="<?= $token ?>" />
+        <input  type="submit" name="submit" value="submit"/>
+    </form>
+
+
+
+    <template id="slide-template">
+        <div class="slide">
+            <div>
+                <img src="" alt=""/>
+            </div>
+            <button>remove</button>
+        </div>
+    </template>
+
+    <script>
+        let preview     = document.querySelector("#carousel-preview");
+        let validFiles  = [];
+        preview.addEventListener("dragenter",
+        (e) => {
+            prevent(e);
+            preview.style.backgroundColor = "#880000";
+        });
+        preview.addEventListener("dragover",
+        (e) => {
+            prevent(e);
+        });
+        preview.addEventListener("dragleave",
+        (e) => {
+            prevent(e);
+            preview.style.backgroundColor = "red";
+        });
+        preview.addEventListener("drop",
+        (e) => {
+            prevent(e);
+            let data    = e.dataTransfer;
+            let files   = data.files;
+            
+            for(let i = 0; i < files.length; i++)
+            {
+                if(files[i].type === "image/jpeg")
+                {
+                    let reader = new FileReader();
+                    reader.readAsDataURL(files[i]);
+                    reader.addEventListener("loadend",
+                    (e) => {
+                        let slideTemplate = document.querySelector("#slide-template").content;
+                        let slide = slideTemplate.cloneNode(true);
+                        let removeBtn = slide.querySelector("button");
+                        let image = slide.querySelector("img");
+                        image.src = reader.result;
+                        preview.appendChild(slide);
+
+                        removeBtn.addEventListener(
+                            "click",
+                            (e) => {
+                                let ownerSlide  = e.target.closest(".slide");
+                                let slides      = preview.querySelectorAll(".slide");
+                                for(let slideIt = 0; slideIt < slides.length; slideIt++)
+                                {
+                                    if(slides[slideIt] === ownerSlide)
+                                    {
+                                        console.log(validFiles);
+                                        validFiles.splice(slideIt, 1);
+                                        console.log(validFiles);
+                                    }
+                                }
+                                preview.removeChild(ownerSlide);
+                            }
+                        );
+                    });
+                    validFiles.push(files[i]);
+                }
+            }
+        });
+
+        function init()
+        {
+            
+            let removeBtns = document.querySelectorAll("#carousel-preview button");
+
+            for(let i = 0; i < removeBtns.length; i++)
+            {
+                removeBtns[i].addEventListener(
+                    "click",
+                    (e) => {
+                        let ownerSlide  = e.target.closest(".slide");
+                        let slides      = preview.querySelectorAll(".slide");
+                        for(let slideIt = 0; slideIt < slides.length; slideIt++)
+                        {
+                            if(slides[slideIt] === ownerSlide)
+                            {
+                                console.log(validFiles);
+                                validFiles.splice(slideIt, 1);
+                                console.log(validFiles);
+                            }
+                        }
+                        preview.removeChild(ownerSlide);
+                    }
+                );
+            }
+        }
+
+        function prevent(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        document.querySelector("form").addEventListener(
+            "submit",
+            (e) => {
+                prevent(e);
+
+                let payload = new FormData();
+                
+                for(let i = 0; i < validFiles.length; i++)
+                {
+                    payload.append("slides[]", validFiles[i]);
+                }
+
+                payload.append("token", document.querySelector("input[name=token]").value);
+
+                fetch("/admin/carouselupdate", {
+                    method : "POST",
+                    body : payload
+                })
+                .then( rep => rep.text())
+                .then( y => console.log(y));
+            }
+        );
+
+
+        init();
+    </script>
+
+<?php require("../app/Views/back/footer.terminal.phtml") ?>

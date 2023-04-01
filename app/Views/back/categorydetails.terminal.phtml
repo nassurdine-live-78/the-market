@@ -1,0 +1,26 @@
+<?php require("../app/Views/back/header.terminal.phtml"); ?>
+
+
+	<form action="/admin/category/updatedetails" method="post">
+		<label>Name</label><input type="text" name="name" value="<?= htmlspecialchars($category->name); ?>"/>
+		<label>Slug</label><input type="text" name="uri" value="<?= htmlspecialchars($category->uri); ?>"/>
+		<input 	type="hidden" 	name="guid" 	value="<?= $category->guid ?>"/>
+		<input 	type="hidden" 	name="token"	value="<?= $token ?>" />
+		<button type="submit">Submit</button>
+	</form>
+	<form action="/admin/category/delete" method="post">
+		<input type="hidden" 	name="token"    value="<?= $token ?>" />
+		<input type="hidden" 	name="guid"     value="<?= $category->guid ?>" />
+		<button type="submit">Delete</button>
+	</form>
+
+    <!-- Product list START -->
+    <?php foreach($products as $product): ?>
+        <a href="/admin/product/details/<?= htmlspecialchars($product->upc); ?>" title="">
+            <img src="/<?= $product->imageuri; ?>" alt="Thumbnail of <?= htmlspecialchars($product->name); ?>"/><br/>
+            <span><?= htmlspecialchars($product->name); ?></span><br/>
+        </a>
+    <?php endforeach; ?>
+    <!-- Product list END -->
+
+<?php require("../app/Views/back/footer.terminal.phtml") ?>

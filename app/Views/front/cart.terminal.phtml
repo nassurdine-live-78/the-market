@@ -1,0 +1,22 @@
+<?php require("header.terminal.phtml") ?>
+	
+	<?php foreach($products as $product): ?>
+        <div>
+            <img src="<?= $product["product"]->imageuri ?>" alt="Thumnail of <?= htmlspecialchars($product["product"]->name); ?>"/>
+            <p><?= htmlspecialchars($product["product"]->name); ?></p>
+            <p>Quantity: <?= $product["quantity"] ?></p>
+            <p>$<?= $product["product"]->price ?></p>
+            <form action="/cart/remove" method="POST">
+                <input type="hidden" name="productId" value="<?= $product["id"] ?>"/>
+                <input type="submit" name="submit" value="Remove item"/>
+            </form>
+        </div>
+    <?php endforeach; ?>
+
+    <?php if($itemcount > 0): ?>
+    <p>Subtotal (<?= $totalitems . (($totalitems === 1) ? " item" : " items"); ?>): $<?= $subtotal ?></p>
+    <a href="/checkout" title="proceed to checkout">Proceed to checkout</a>
+    <?php endif; ?>
+
+
+<?php require("footer.terminal.phtml") ?>
